@@ -68,5 +68,19 @@ public class BinarySearchTree {
 			}
 		}
 	}
+	void printPreorder(Node node) 
+    { 
+        if (node == null) 
+            return; 
+  
+        /* first print data of node */
+        System.out.print(node.data + " "); 
+  
+        /* then recur on left sutree */
+        printPreorder(node.left); 
+  
+        /* now recur on right subtree */
+        printPreorder(node.right); 
+    } 
 	
 }
