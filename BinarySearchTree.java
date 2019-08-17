@@ -83,4 +83,28 @@ public class BinarySearchTree {
         printPreorder(node.right); 
     } 
 	
+public Node delete(Node root, int val) {
+	if(root==null) {
+		return root;
+	}
+	else if(val<root.data) {
+		root.left = delete(root.left,val);
+	}
+	else if(val>root.data) {
+		root.right = delete(root.right,val);
+	}
+	else {
+		if(root.left ==null) {
+			return root.right;
+		}
+		else if(root.right == null) {
+			return root.left;
+		}
+		Node k = min(root.right);
+		root.data = k.data;
+		root.right = delete(root.right, root.data);
+	}
+	return root;
+}
+	
 }
