@@ -1,15 +1,11 @@
 
 public class Driver {
-
 	public static void main(String[] args) {
-		BinarySearchTree bst1 = new BinarySearchTree();
-		Node root = bst1.insert(null, 4);
-		bst1.insert(root, 4);
-		bst1.insert(root,5);
-		bst1.insert(root,2);
-		bst1.insert(root,0);
-		bst1.inorder(root);
-		bst1.max(root);
+		AVLTree avl = new AVLTree();
+		System.out.println("Insertion sequence: 15, 10, 5");
+		avl.insert(15); avl.insert(10); avl.insert(5);
+		System.out.print("preorder: "); avl.preorder();
+System.out.print("inorder: "); avl.inorder();
 
 	}
 
