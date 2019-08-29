@@ -3,6 +3,9 @@ public class BSTNode {
 	public int data;
 	public BSTNode right;
 	public BSTNode left;
+	BSTNode(){
+
+	}
 	BSTNode(int d){
 		this.data = d;
 	}
@@ -39,6 +42,20 @@ public class BSTNode {
 		}
 	}
 
+	public BSTNode searchNode(int val){
+		if(data == val){
+			return this;
+		}
+		else if(left!=null && val<data){
+			return left.searchNode(val);
+		}
+		else if(right!=null && val>data){
+			return right.searchNode(val);
+		}
+		else{
+			return null;
+		}
+	}
 	public void inorder(){
 		if(left!=null){
 			left.inorder();
@@ -67,7 +84,7 @@ public class BSTNode {
 			right.preorder();
 		}
 	}
-	public boolean isLeft(){
+	public boolean isLeaf(){
 		if(left==null && right==null){
 			return true;
 		}
@@ -92,7 +109,7 @@ public class BSTNode {
 		}
 	}
 	public int height(){
-		if(isLeft()) {
+		if(isLeaf()) {
 			return 0;
 		}
 		else if(hasOnlyLeft()){
@@ -111,6 +128,14 @@ public class BSTNode {
 		}
 		else{
 			return b;
+		}
+	}
+	public BSTNode maxNode(){
+		if(right==null){
+			return this;
+		}
+		else{
+			return right.maxNode();
 		}
 	}
 }

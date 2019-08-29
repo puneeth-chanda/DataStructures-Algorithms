@@ -17,6 +17,14 @@ public class BST{
         }
 
     }
+    public BSTNode searchNode(int val){
+        if(root==null){
+            return null; 
+        }
+        else{
+            return root.searchNode(val);
+        }
+    }
     public void inorder(){
         if(root==null){
             return;
@@ -48,5 +56,21 @@ public class BST{
         else{
             return root.height();
         }
+    }
+    public BSTNode maxNode(){
+        if(root.isLeaf()){
+            return root;
+        }
+        else{
+            return root.maxNode();
+        }
+    }
+    public BSTNode sucessor(int val){
+        BSTNode b = searchNode(val);
+        return b.right;
+    }
+    public BSTNode predecessor(int val){
+        BSTNode b = searchNode(val);
+        return b.left;
     }
 }

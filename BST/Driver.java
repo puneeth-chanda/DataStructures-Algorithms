@@ -11,5 +11,7 @@ public class Driver {
 	System.out.println( b.search(70) );  // prints true
 	System.out.println(b.height());
 	b.inorder();	
+	System.out.println(b.maxNode().data);
+	System.out.println(b.predecessor(30).data);
 }
 }
