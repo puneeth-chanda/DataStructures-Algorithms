@@ -1,7 +1,7 @@
 
 public class Driver {
     public static void main(String[] args) {
-        BST b = new BST();
+        AVL b = new AVL();
 	
 	int[] arr = {50, 20, 80, 10, 30, 5, 15, 25, 35, 70, 90, 65,75, 85, 95};
 	for (int i=0; i< arr.length; i++){

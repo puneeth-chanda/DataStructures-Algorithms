@@ -70,4 +70,13 @@ public class LinkedList{
     void deleteFirst(){
         head = head.next;
     }
+    int size(){
+        Node temp = head;
+        int count = 0;
+        while(temp!=null){
+            temp = temp.next;
+            count++;
+        }
+        return count;
+    }
 }

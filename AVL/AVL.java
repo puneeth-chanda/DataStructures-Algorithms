@@ -1,8 +1,8 @@
-public class BST{
-    protected BSTNode root;
+public class AVL{
+    protected AVLNode root;
     public void insert(int val){
         if(root==null){
-            root = new BSTNode(val);
+            root = new AVLNode(val);
         }
         else{
             root.insert(val);
@@ -17,7 +17,7 @@ public class BST{
         }
 
     }
-    public BSTNode searchNode(int val){
+    public AVLNode searchNode(int val){
         if(root==null){
             return null; 
         }
@@ -57,7 +57,7 @@ public class BST{
             return root.height();
         }
     }
-    public BSTNode maxNode(){
+    public AVLNode maxNode(){
         if(root.isLeaf()){
             return root;
         }
@@ -65,12 +65,12 @@ public class BST{
             return root.maxNode();
         }
     }
-    public BSTNode sucessor(int val){
-        BSTNode b = searchNode(val);
+    public AVLNode sucessor(int val){
+        AVLNode b = searchNode(val);
         return b.right;
     }
-    public BSTNode predecessor(int val){
-        BSTNode b = searchNode(val);
+    public AVLNode predecessor(int val){
+        AVLNode b = searchNode(val);
         return b.left;
     }
 }
