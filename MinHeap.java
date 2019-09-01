@@ -63,6 +63,26 @@ public class MinHeap{
     }        
     System.out.println();
     }
-    
-
+    public void fixHeap(int i){
+        int k = checkProperty(i);
+        if(i==k){
+            return;
+        }
+        else{
+            swap(i, k);
+            fixHeap(k);
+        }
+        
+    }
+    public void buildHeap(){
+        for(int i=(arr.length-2)/2;i>=0;i--){
+            fixHeap(i);
+        }
+    }
+    public int extractMin(){
+        int val = arr[0];
+        arr[0] = arr[size-1];
+        fixHeap(0);
+        return val;
+    }
 }
