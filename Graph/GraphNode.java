@@ -16,7 +16,9 @@ public class GraphNode{
         System.out.print(label+ " ");
         visited = true;
         for(int j=0;j<adjList.size();j++){
-            if(adjList.get(j).dfs());
+            if(!adjList.get(j).visited){
+                adjList.get(j).dfs();
+            }
         }
     }
 }
