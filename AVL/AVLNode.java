@@ -1,127 +1,113 @@
-public class AVLNode{
-    int data;
-    AVLNode left;
-    AVLNode right;
-    int balanceFactor;
-    AVLNode(int d){
-        this.data = d;
-    }
-    public AVLNode insert(int val){
-		if(val<data){
-			if(left==null){
-				left = new AVLNode(val);
-			}
-			else{
-				left.insert(val);
-			}
-		}
-		else{
-			if(right==null){
-				right = new AVLNode(val);
-			}
-			else{
-				right.insert(val);
-			}
-		}
-		balanceFactor = computeBalance();
-		switch(balanceFactor){
-			case 2:
-			if(left.balanceFactor>=0){
-				return rotateWithleft();
-			}
-			else{
-				left = left.rotateWithRight();
-				return rotateWithleft();
-			}
-			case -2:
-			if(right.balanceFactor<=0){
-				return rotateWithRight();
-			}
-			else{
-				left = left.rotateWithleft();
-				return rotateWithRight();
-			}				
-			}
-			return this;
-		}
-	public boolean search(int val){
-		if(data ==val){
-			return true;
-		}
-		else if(left!=null && val<data){
-			return left.search(val);
-		}
-		else if(right!=null && val>data){
-			return right.search(val);
-		}
-		else{
-			return false;
-		}
-	}
 
-	public AVLNode searchNode(int val){
-		if(data == val){
-			return this;
-		}
-		else if(left!=null && val<data){
-			return left.searchNode(val);
-		}
-		else if(right!=null && val>data){
-			return right.searchNode(val);
-		}
-		else{
-			return null;
+public class AVLNode {
+	protected int data;
+	protected AVLNode left;
+	protected AVLNode right;
+	protected int balanceFactor =0;
+	public AVLNode(int data) {
+		this.data = data;
+		this.balanceFactor = 0;
+	}
+	public AVLNode insert(int key) {
+		if(key<data) {
+			if(left==null) {
+			left = new AVLNode(key);
+			}
+			else {
+				left.insert(key);
 		}
 	}
-	public void inorder(){
-		if(left!=null){
+		if(key>data) {
+			if(right==null) {
+				right = new AVLNode(key);
+		}
+			else {
+				right.insert(key);
+			}
+	}
+	balanceFactor = computeBalance();
+	switch(balanceFactor) {
+	case 2:
+		if(left.balanceFactor >=0) {
+			return rotateWithLeftChild();
+		}
+		else {
+			left = left.rotateWithLeftChild();
+			return rotateWithLeftChild();
+		}
+	case -2:
+		if(right.balanceFactor<=0) {
+			return rotateWithRightChild();
+		}
+		else {
+			right = right.rotateWithRightChild();
+			return rotateWithRightChild();
+		}
+			
+		}
+	return this;
+	}
+	public void inorder() {
+		if(left!=null) {
 			left.inorder();
 		}
-		System.out.println(data);
-		if(right!=null){
+		System.out.print(data+" ");
+		if(right!=null) {
 			right.inorder();
 		}
 	}
-	public void postorder(){
-		if(left!=null){
+	public void postorder() {
+		if(left!=null) {
 			left.postorder();
 		}
-		if(right!=null){
+
+		if(right!=null) {
 			right.postorder();
 		}
-		System.out.println(data);
+		System.out.print(data+" ");
 	}
-	public void preorder(){
-		System.out.println(data);
-		if(left!=null){
+	public void preorder() {
+		System.out.print(data+" ");
+		if(left!=null) {
 			left.preorder();
 		}
-
-		if(right!=null){
+		if(right!=null) {
 			right.preorder();
 		}
 	}
-	public boolean isLeaf(){
-		if(left==null && right==null){
+	public boolean search(int key) {
+		if(data==key) {
 			return true;
 		}
-		else{
+		else if(left!=null && key<data) {
+			left.search(key);
+		}
+		else if(right!=null && key>data) {
+			right.search(key);
+		}
+		return false;
+	}
+	public boolean isLeaf() {
+		if(left==null && right==null) {
+			return true;
+		}
+		else {
 			return false;
 		}
 	}
-	public boolean hasOnlyLeft(){
-		if(left!=null && right==null){
+	public boolean hasOnlyLeft() {
+		if(left!=null && right==null) {
 			return true;
 		}
-		else{
+		else {
 			return false;
 		}
 	}
-	public boolean hasOnlyRight(){
-		if(right!=null && left==null){
+	public boolean hasOnlyRight() {
+		if(right!=null && left==null) {
 			return true;
 		}
-		else{
+		else {
 			return false;
 		}
 	}
@@ -129,60 +115,50 @@ public class AVLNode{
 		if(isLeaf()) {
 			return 0;
 		}
-		else if(hasOnlyLeft()){
-			return left.height()+1;
+		else if(hasOnlyRight()) {
+			return right.height() +1;
 		}
-		else if(hasOnlyRight()){
-			return right.height()+1;
+		else if(hasOnlyLeft()) {
+			return right.height() +1;
 		}
-		else{
-			return max(left.height(),right.height()+1);
+		else {
+			return max(left.height(),right.height())+1;
 		}
 	}
-	public int max(int a, int b){
-		if(a>b){
+	public int max(int a,int b) {
+		if(a>b) {
 			return a;
-		}
-		else{
+	}
+		else {
 			return b;
 		}
 	}
-	public AVLNode maxNode(){
-		if(right==null){
-			return this;
-		}
-		else{
-			return right.maxNode();
-		}
+    public AVLNode rotateWithLeftChild() {
+    	AVLNode lc = left;
+    	left = lc.right;
+    	lc.right = this;
+    	computeBalance(); lc.computeBalance();
+    	return lc;
     }
-    public int computeBalance(){
-        if(isLeaf()){
-            return 0;
+
+    public AVLNode rotateWithRightChild() {
+    	AVLNode rc = right;
+    	right = rc.left;
+    	rc.left = this;
+    	computeBalance(); rc.computeBalance();
+    	return rc;
+    }
+
+    public int computeBalance() {
+        if (isLeaf()) return 0;
+        else if (hasOnlyLeft()) {
+        	return left.height()+1;
         }
-        else if(hasOnlyLeft()){
-            return (left.height()+1);
-		}
-		else if(hasOnlyRight()){
-			return -1*(right.height()+1);
-		}
-		else{
-			return left.height() - right.height();
-		}
+        else if (hasOnlyRight()) {
+        	return -1 * (right.height()+1);
+        }
+        else {
+        	return left.height() - right.height();
+        }
     }
-    public AVLNode rotateWithleft(){
-        AVLNode lc = left;
-		left = lc.right;
-		lc.right = this;
-
-		computeBalance(); lc.computeBalance();
-		return lc;
-	}
-	public AVLNode rotateWithRight(){
-		AVLNode rc = right;
-		right = rc.left;
-		rc.right = this;
-		computeBalance(); rc.computeBalance();
-		return rc;
-	}
-
 }
