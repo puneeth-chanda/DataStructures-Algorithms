@@ -71,8 +71,7 @@ public class MinHeap{
         else{
             swap(i, k);
             fixHeap(k);
-        }
-        
+        } 
     }
     public void buildHeap(){
         for(int i=(arr.length-2)/2;i>=0;i--){
