@@ -3,22 +3,29 @@ public class GraphNode{
     int label;
     ArrayList<GraphNode> adjList;
     boolean visited;
+    int preOrder;
+    int postOrder;
     GraphNode(int l){
         this.label = l;
         adjList = new ArrayList<GraphNode>();
     }
     public void print(){
-        for(int j=0;j<adjList.size();j++){
-            System.out.print(adjList.get(j).label+"->");
+        for(int i=0;i<adjList.size();i++){
+            System.out.print(adjList.get(i).label+"->");
         }
     }
-    public void dfs(){
-        System.out.print(label+ " ");
-        visited = true;
+    public int dfs(int visitCount){
+        System.out.print(label+"");
+        visited= true;
+        preOrder = visitCount;
+
         for(int j=0;j<adjList.size();j++){
             if(!adjList.get(j).visited){
-                adjList.get(j).dfs();
+                adjList.get(j).dfs(++visitCount);
             }
         }
+        postOrder = ++visitCount;
+        return visitCount;
     }
+    
 }
